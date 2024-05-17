@@ -1,4 +1,4 @@
-# README for Branch Predictor Accuracy Analysis
+# Branch Predictor Accuracy Analysis
 
 ## Overview
 This project contains Python scripts that analyze the accuracy of one-bit and two-bit branch predictors. The scripts generate sequences of branch outcomes, compute the prediction accuracies, and identify sequences where one predictor outperforms the other.
