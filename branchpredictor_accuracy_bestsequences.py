@@ -105,6 +105,37 @@ def plot_sequences(max_length):
 
     plt.show()
 
+def plot_percentage_better_1bit(max_length):
+    fig, ax = plt.subplots(figsize=(10, 6))
+    percentages = []
+    lengths = range(1, max_length + 1)
+
+    for length in lengths:
+        outcomes = ['T', 'N']
+        all_sequences = itertools.product(outcomes, repeat=length)
+        total_sequences = 0
+        better_1bit_count = 0
+
+        for sequence in all_sequences:
+            sequence = ''.join(sequence)
+            one_bit_accuracy = one_bit_predictor(sequence)
+            two_bit_accuracy = two_bit_predictor(sequence)
+            total_sequences += 1
+            if one_bit_accuracy > two_bit_accuracy:
+                better_1bit_count += 1
+
+        percentage = (better_1bit_count / total_sequences) * 100
+        percentages.append(percentage)
+
+    ax.plot(lengths, percentages, marker='o', linestyle='-', color='b')
+    ax.set_title('Percentage of Sequences Where 1-bit Predictor is Better Than 2-bit')
+    ax.set_xlabel('Sequence Length')
+    ax.set_ylabel('Percentage (%)')
+    ax.grid(True)
+
+    plt.show()
+
 if __name__ == "__main__":
     max_length = int(input("Enter the maximum sequence length: "))
     plot_sequences(max_length)
+    plot_percentage_better_1bit(max_length)
